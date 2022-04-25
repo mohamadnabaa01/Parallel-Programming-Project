@@ -10,7 +10,7 @@ int main(void) {
     }
     char characters[LENGTH];
     for(int i = 0; i<LENGTH; i++)
-        characters[i] = getRandomCharacter();
+        characters[i] = (char) getRandomCharacter();
 
     char* s = (char*) malloc(sizeof(char)*LENGTH);
     for(int i = 0; i<LENGTH; i++){
