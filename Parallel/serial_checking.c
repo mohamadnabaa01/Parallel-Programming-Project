@@ -16,7 +16,7 @@ int main(void) {
         check_occurences[i]=0;
     }
 
-    printf("%d", string);
+    printf("%s", string);
     return 0;
 }
 
