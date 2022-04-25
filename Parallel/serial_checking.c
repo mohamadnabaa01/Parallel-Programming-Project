@@ -4,25 +4,24 @@
 #define SIZE 26
 #define LENGTH 100
 int main(void) {
+    FILE *file;
+    file = fopen("string.txt", "r");//open the file fname
+    if(!file)//if open failed
+        return -1;
+    char string[256];
+    fscanf(file, "%[^\n]\n", string);//read the contents of the file and put in string
+    
     char  check_occurences[SIZE];
     for(int i=0;i<SIZE;i++){
         check_occurences[i]=0;
     }
-    char characters[LENGTH];
-    for(int i = 0; i<LENGTH; i++)
-        characters[i] = (char) getRandomCharacter();
 
-    char* s = (char*) malloc(sizeof(char)*LENGTH);
-    for(int i = 0; i<LENGTH; i++){
-        s[i] = characters[i];
-    }
-    printf("%d", s);
-    
+    printf("%d", string);
     return 0;
 }
 
-char getRandromCharacter(){
-    char c = (char) rand() % (90-65) + 65;
-    return c; 
+int getRandromNumber(){
+    int num = rand() % (90-65) + 65;
+    return num; 
 }
 
