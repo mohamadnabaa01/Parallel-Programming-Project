@@ -20,6 +20,7 @@ int main(void)
     printf("The string is: %s\n", string);
 
     start_time = clock();
+    printf(start_time);
 
     int check_occurences[SIZE];
     for (int i = 0; i < SIZE; i++)
@@ -33,6 +34,7 @@ int main(void)
             printf("The char %c is repeated %d times in the string\n", ((char)(i + 'a')), check_occurences[i]);
 
     end_time = clock();
+    printf(end_time);
 
     printf("Time complexity: %f", (double) (start_time - end_time) / CLOCKS_PER_SEC);
     return 0;
