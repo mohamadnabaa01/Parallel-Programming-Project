@@ -28,6 +28,8 @@ int main(void) {
             printf("The char %s is repeated %d times in the string", (char) i + 'a', check_occurences[i]);
     }
 
+    fflush(stdout);
+
     
     printf("%s", string);
     return 0;
