@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <mpi.h>
+
 #define SIZE 26
 #define LENGTH 100
 int main(void)
@@ -16,6 +18,8 @@ int main(void)
     fscanf(file, "%[^\n]\n", string); // read the contents of the file and put in string
     printf("The string is: %s\n", string);
 
+    double start_time = MPI_Wtime();
+
     int check_occurences[SIZE];
     for (int i = 0; i < SIZE; i++)
         check_occurences[i] = 0;
@@ -27,5 +31,8 @@ int main(void)
         if (check_occurences[i] != 0)
             printf("The char %c is repeated %d times in the string\n", ((char)(i + 'a')), check_occurences[i]);
 
+    double end_time = MPI_Wtime();
+
+    printf("Time complexity: %d", start_time - end_time);
     return 0;
 }
