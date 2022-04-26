@@ -8,8 +8,8 @@ int main(void) {
     file = fopen("string.txt", "r");//open the file fname
     if(!file)//if open failed
         return -1;
-    int string_length = 0;
-    fscanf(file, "%d", string_length);
+    int string_length = 64;
+    // fscanf(file, "%d", string_length);
     printf("Length of string is: " + string_length);
     char string[string_length];
     fscanf(file, "%[^\n]\n", string);//read the contents of the file and put in string
@@ -27,9 +27,6 @@ int main(void) {
         if(check_occurences[i] != 0)
             printf("The char %c is repeated %d times in the string", (char) i + 'a', check_occurences[i]);
     }
-
-    fflush(stdout);
-
     
     printf("%s", string);
     return 0;
