@@ -25,7 +25,7 @@ int main(void) {
 
     for(int i=0; i<SIZE; i++){
         if(check_occurences[i] != 0)
-            fprintf("The char %s is repeated %d times in the string", (char) i + 'a', check_occurences[i]);
+            printf("The char %c is repeated %d times in the string", (char) i + 'a', check_occurences[i]);
     }
 
     fflush(stdout);
