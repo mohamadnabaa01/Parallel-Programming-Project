@@ -11,7 +11,7 @@ int main(void)
     file = fopen("string.txt", "r"); // open the file fname
     if (!file)                       // if open failed
         return -1;
-    double start_time, end_time;
+    clock_t start_time, end_time;
     int string_length = 0;
     fscanf(file, "%d\n", &string_length);
     printf("Length of string is: %d\n", string_length);
@@ -34,6 +34,6 @@ int main(void)
 
     end_time = clock();
 
-    printf("Time complexity: %d", start_time - end_time);
+    printf("Time complexity: %d", (double) (start_time - end_time) / CLOCKS_PER_SEC);
     return 0;
 }
