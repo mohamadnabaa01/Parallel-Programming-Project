@@ -11,6 +11,7 @@ int main(void)
     file = fopen("string.txt", "r"); // open the file fname
     if (!file)                       // if open failed
         return -1;
+    double start_time, end_time;
     int string_length = 0;
     fscanf(file, "%d\n", &string_length);
     printf("Length of string is: %d\n", string_length);
@@ -18,7 +19,8 @@ int main(void)
     fscanf(file, "%[^\n]\n", string); // read the contents of the file and put in string
     printf("The string is: %s\n", string);
 
-    double start_time = MPI_Wtime();
+    srand(time(0));
+    start_time = MPI_Wtime();
 
     int check_occurences[SIZE];
     for (int i = 0; i < SIZE; i++)
@@ -31,7 +33,7 @@ int main(void)
         if (check_occurences[i] != 0)
             printf("The char %c is repeated %d times in the string\n", ((char)(i + 'a')), check_occurences[i]);
 
-    double end_time = MPI_Wtime();
+    end_time = MPI_Wtime();
 
     printf("Time complexity: %d", start_time - end_time);
     return 0;
