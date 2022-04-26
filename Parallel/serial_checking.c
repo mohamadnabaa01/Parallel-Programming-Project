@@ -8,7 +8,9 @@ int main(void) {
     file = fopen("string.txt", "r");//open the file fname
     if(!file)//if open failed
         return -1;
-    char string[256];
+    int string_length;
+    fscanf(file, "%d\n", string_length);
+    char string[string_length];
     fscanf(file, "%[^\n]\n", string);//read the contents of the file and put in string
     
     char  check_occurences[SIZE];
@@ -16,12 +18,17 @@ int main(void) {
         check_occurences[i]=0;
     }
 
+    for(int i=0; i<string_length; i++){
+        check_occurences[string[i] - 'a']++;
+    }
+
+    for(int i=0; i<SIZE; i++){
+        if(check_occurences[i] != 0)
+            printf("The char %s is repeated %d times in the string", (char) i + 'a', check_occurences[i]);
+    }
+
+    
     printf("%s", string);
     return 0;
-}
-
-int getRandromNumber(){
-    int num = rand() % (90-65) + 65;
-    return num; 
 }
 
