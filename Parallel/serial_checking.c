@@ -19,8 +19,7 @@ int main(void)
     fscanf(file, "%[^\n]\n", string); // read the contents of the file and put in string
     printf("The string is: %s\n", string);
 
-    srand(time(0));
-    start_time = MPI_Wtime();
+    start_time = clock();
 
     int check_occurences[SIZE];
     for (int i = 0; i < SIZE; i++)
@@ -33,7 +32,7 @@ int main(void)
         if (check_occurences[i] != 0)
             printf("The char %c is repeated %d times in the string\n", ((char)(i + 'a')), check_occurences[i]);
 
-    end_time = MPI_Wtime();
+    end_time = clock();
 
     printf("Time complexity: %d", start_time - end_time);
     return 0;
