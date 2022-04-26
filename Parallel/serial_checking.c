@@ -14,7 +14,7 @@ int main(void) {
     char string[string_length];
     fscanf(file, "%[^\n]\n", string);//read the contents of the file and put in string
     
-    char  check_occurences[SIZE];
+    int check_occurences[SIZE];
     for(int i=0;i<SIZE;i++){
         check_occurences[i]=0;
     }
