@@ -10,7 +10,7 @@ int main(void)
     if (!file)                       // if open failed
         return -1;
     int string_length = 0;
-    fscanf(file, "%d", &string_length);
+    fscanf(file, "%d\n", &string_length);
     printf("Length of string is: %d\n", string_length);
     char string[string_length + 1];
     fscanf(file, "%[^\n]\n", string); // read the contents of the file and put in string
