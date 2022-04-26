@@ -34,6 +34,6 @@ int main(void)
 
     end_time = clock();
 
-    printf("Time complexity: %d", (double) (start_time - end_time) / CLOCKS_PER_SEC);
+    printf("Time complexity: %f", (double) (start_time - end_time) / CLOCKS_PER_SEC);
     return 0;
 }
