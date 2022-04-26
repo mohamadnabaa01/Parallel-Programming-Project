@@ -11,7 +11,7 @@ int main(void)
     file = fopen("string.txt", "r"); // open the file fname
     if (!file)                       // if open failed
         return -1;
-    clock_t start_time, end_time;
+    time_t start_time, end_time;
     int string_length = 0;
     fscanf(file, "%d\n", &string_length);
     printf("Length of string is: %d\n", string_length);
@@ -19,7 +19,7 @@ int main(void)
     fscanf(file, "%[^\n]\n", string); // read the contents of the file and put in string
     printf("The string is: %s\n", string);
 
-    start_time = clock();
+    time(start_time);
     printf("%f", start_time);
 
     int check_occurences[SIZE];
@@ -33,9 +33,9 @@ int main(void)
         if (check_occurences[i] != 0)
             printf("The char %c is repeated %d times in the string\n", ((char)(i + 'a')), check_occurences[i]);
 
-    end_time = clock();
+    time(end_time);
     printf("%f", end_time);
 
-    printf("Time complexity: %f", (double) (start_time - end_time) / CLOCKS_PER_SEC);
+    printf("Time complexity: %f", (double) (start_time - end_time));
     return 0;
 }
