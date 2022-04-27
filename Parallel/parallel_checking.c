@@ -20,6 +20,7 @@ int main(int argc, char **argv)
     int rank = 0, size = 0;
     int number_of_characters = 0;
     char *string;
+    int all_characters_checked = 0;
     for (int i = 0; i < TOTAL_CHARS; i++)
     {
         nums[i].character = (char)('a' + i);
@@ -63,16 +64,19 @@ int main(int argc, char **argv)
     {
         int index = (int)string[i] - 'a';
         nums[index].occurrence++;
+        all_characters_checked++;
     }
 
     MPI_Barrier(MPI_COMM_WORLD);
+    if (all_characters_checked == number_of_characters)
+    {
+        for (int i = 0; i <= TOTAL_CHARS; i++)
+        {
+            printf("The char %c is repeated %d times in the string\n", nums[i].character, nums[i].occurrence);
+        }
+    }
     end = MPI_Wtime();
 
     printf("Execution time: %f\n", end - start);
     MPI_Finalize();
-
-    for (int i = 0; i <= TOTAL_CHARS; i++)
-    {
-        printf("The char %c is repeated %d times in the string\n", nums[i].character, nums[i].occurrence);
-    }
 }
