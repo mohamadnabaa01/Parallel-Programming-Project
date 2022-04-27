@@ -50,23 +50,24 @@ int main(int argc, char **argv)
     // MPI_Scatter(string, number_of_characters, MPI_CHAR, received_chars_per_processor, num_of_chars_per_processor, MPI_CHAR, 0, MPI_COMM_WORLD);
 
     MPI_Bcast(string, number_of_characters, MPI_CHAR, 0, MPI_COMM_WORLD);
-    
-    int low = num_of_chars_per_processor * rank;
-    int high = low + num_of_chars_per_processor * rank - 1;
 
-    for (int i = low; i < high; i++)
-    {
-        int index = received_chars_per_processor[i] - 'a';
-        nums[index].occurrence++;
-    }
+    printf("I am rank %d and i have: %s\n", rank, string);
+    // int low = num_of_chars_per_processor * rank;
+    // int high = low + num_of_chars_per_processor * rank - 1;
 
-    if (rank == size - 1)
-    {
-        for (int i = 0; i < 26; i++)
-        {
-            printf("The char %c is repeated %d times in the string\n", nums[i].character, nums[i].occurrence);
-        }
-    }
+    // for (int i = low; i < high; i++)
+    // {
+    //     int index = received_chars_per_processor[i] - 'a';
+    //     nums[index].occurrence++;
+    // }
+
+    // if (rank == size - 1)
+    // {
+    //     for (int i = 0; i < 26; i++)
+    //     {
+    //         printf("The char %c is repeated %d times in the string\n", nums[i].character, nums[i].occurrence);
+    //     }
+    // }
 
     MPI_Barrier(MPI_COMM_WORLD);
     end = MPI_Wtime();
