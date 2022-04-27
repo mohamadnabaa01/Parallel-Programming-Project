@@ -39,13 +39,10 @@ int main(int argc, char **argv)
     }
     char* string = (char*) malloc(sizeof(char) * number_of_characters);
     fscanf(file, "%[^\n]\n", string); // read the contents of the file and put in string
-    printf("The string is: %s\n", string);
 
     int num_of_chars_per_processor = number_of_characters / size;
 
     char *received_chars_per_processor = (char*)malloc(sizeof(char) * num_of_chars_per_processor);
-
-    printf("%s", string);
 
     // MPI_Scatter(string, number_of_characters, MPI_CHAR, received_chars_per_processor, num_of_chars_per_processor, MPI_CHAR, 0, MPI_COMM_WORLD);
 
@@ -54,6 +51,8 @@ int main(int argc, char **argv)
     // printf("I am rank %d and i have: %s\n", rank, string);
     int low = num_of_chars_per_processor * rank;
     int high = low + num_of_chars_per_processor * rank - 1;
+
+    printf("%d %d", low, high);
 
     for (int i = low; i < high; i++)
     {
