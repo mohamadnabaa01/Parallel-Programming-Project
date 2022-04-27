@@ -43,6 +43,8 @@ int main(int argc, char **argv)
         fscanf(file, "%[^\n]\n", string); // read the contents of the file and put in string
     }
 
+    int num_of_chars_per_processor = number_of_characters / size;
+
     // MPI_Scatter(string, number_of_characters, MPI_CHAR, received_chars_per_processor, num_of_chars_per_processor, MPI_CHAR, 0, MPI_COMM_WORLD);
 
     MPI_Bcast(string, number_of_characters, MPI_CHAR, 0, MPI_COMM_WORLD);
