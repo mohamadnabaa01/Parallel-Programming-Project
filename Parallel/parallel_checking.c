@@ -52,14 +52,14 @@ int main(int argc, char **argv)
     int low = num_of_chars_per_processor * rank;
     int high = low + num_of_chars_per_processor- 1;
 
-    printf("%d %d", low, high);
+    // printf("%d %d", low, high);
 
-    // for (int i = low; i < high; i++)
-    // {
-    //     int index = received_chars_per_processor[i] - 'a';
-    //     nums[index].occurrence++;
-    //     printf("%d", index);
-    // }
+    for (int i = low; i < high; i++)
+    {
+        int index = received_chars_per_processor[i] - 'a';
+        nums[index].occurrence++;
+        printf("%d", index);
+    }
 
     // if (rank == size - 1)
     // {
@@ -72,6 +72,6 @@ int main(int argc, char **argv)
     MPI_Barrier(MPI_COMM_WORLD);
     end = MPI_Wtime();
 
-    printf("Execution time: %f", end - start);
+    // printf("Execution time: %f", end - start);
     MPI_Finalize();
 }
