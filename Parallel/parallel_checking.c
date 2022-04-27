@@ -32,31 +32,31 @@ int main(int argc, char **argv)
         return -1;
     fscanf(file, "%d\n", &number_of_characters);
     printf("Length of string is: %d\n", number_of_characters);
-    for (int i = 0; i < 26; i++)
+    if (rank == 0)
     {
-        nums[i].character = (char)('a' + i);
-        nums[i].occurrence = 0;
+        for (int i = 0; i < 26; i++)
+        {
+            nums[i].character = (char)('a' + i);
+            nums[i].occurrence = 0;
+        }
     }
-    char* string = (char*) malloc(sizeof(char) * number_of_characters);
+    char *string = (char *)malloc(sizeof(char) * number_of_characters);
     fscanf(file, "%[^\n]\n", string); // read the contents of the file and put in string
 
     int num_of_chars_per_processor = number_of_characters / size;
 
-    char *received_chars_per_processor = (char*)malloc(sizeof(char) * num_of_chars_per_processor);
+    char *received_chars_per_processor = (char *)malloc(sizeof(char) * num_of_chars_per_processor);
 
     // MPI_Scatter(string, number_of_characters, MPI_CHAR, received_chars_per_processor, num_of_chars_per_processor, MPI_CHAR, 0, MPI_COMM_WORLD);
 
     MPI_Bcast(string, number_of_characters, MPI_CHAR, 0, MPI_COMM_WORLD);
 
-    // printf("I am rank %d and i have: %s\n", rank, string);
     int low = num_of_chars_per_processor * rank;
-    int high = low + num_of_chars_per_processor- 1;
-
-    // printf("%d %d", low, high);
+    int high = low + num_of_chars_per_processor - 1;
 
     for (int i = low; i <= high; i++)
     {
-        int index =  (int) string[i] - 'a';
+        int index = (int)string[i] - 'a';
         printf("Char %c has index of: %d\n", string[i], index);
         nums[index].occurrence++;
     }
@@ -72,6 +72,6 @@ int main(int argc, char **argv)
     MPI_Barrier(MPI_COMM_WORLD);
     end = MPI_Wtime();
 
-    // printf("Execution time: %f", end - start);
+    printf("Execution time: %f", end - start);
     MPI_Finalize();
 }
