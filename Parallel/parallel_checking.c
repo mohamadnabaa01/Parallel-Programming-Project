@@ -61,7 +61,7 @@ int main(int argc, char **argv)
         int index = (int)string[i] - 'a';
         printf("Char %c has index of: %d\n", string[i], index);
         nums[index].occurrence++;
-        printf("%d\n", nums[i].occurrence);
+        printf("%d\n", nums[index].occurrence);
     }
 
     if (rank == size - 1)
