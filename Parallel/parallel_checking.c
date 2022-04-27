@@ -61,13 +61,14 @@ int main(int argc, char **argv)
     {
         int index = (int)string[i] - 'a';
         nums[index].occurrence++;
+        printf("Occurrence is %d", nums[index].occurrence);
     }
 
     if (rank == size - 1)
     {
         for (int i = 0; i < 26; i++)
         {
-            printf("The char %c is repeated %d times in the string\n", nums[i].character, &nums[i].occurrence);
+            printf("The char %c is repeated %d times in the string\n", nums[i].character, nums[i].occurrence);
         }
     }
 
