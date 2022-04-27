@@ -60,8 +60,8 @@ int main(int argc, char **argv)
     for (int i = low; i <= high; i++)
     {
         int index = (int)string[i] - 'a';
+        printf("%d", index);
         nums[index].occurrence++;
-        printf("Occurrence is %d", nums[index].occurrence);
     }
 
     if (rank == size - 1)
