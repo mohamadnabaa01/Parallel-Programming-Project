@@ -60,7 +60,7 @@ int main(int argc, char **argv)
     int low = num_of_chars_per_processor * rank;
     int high = low + num_of_chars_per_processor - 1;
 
-    printf("%d\n", &number_of_characters);
+    printf("%d\n", number_of_characters);
 
     for (int i = low; i <= high; i++)
     {
