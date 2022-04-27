@@ -51,15 +51,16 @@ int main(int argc, char **argv)
 
     MPI_Bcast(string, number_of_characters, MPI_CHAR, 0, MPI_COMM_WORLD);
 
-    printf("I am rank %d and i have: %s\n", rank, string);
-    // int low = num_of_chars_per_processor * rank;
-    // int high = low + num_of_chars_per_processor * rank - 1;
+    // printf("I am rank %d and i have: %s\n", rank, string);
+    int low = num_of_chars_per_processor * rank;
+    int high = low + num_of_chars_per_processor * rank - 1;
 
-    // for (int i = low; i < high; i++)
-    // {
-    //     int index = received_chars_per_processor[i] - 'a';
-    //     nums[index].occurrence++;
-    // }
+    for (int i = low; i < high; i++)
+    {
+        int index = received_chars_per_processor[i] - 'a';
+        nums[index].occurrence++;
+        printf("%d", index);
+    }
 
     // if (rank == size - 1)
     // {
