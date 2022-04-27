@@ -58,7 +58,7 @@ int main(int argc, char **argv)
         }
     }
 
-    MPI_Barrier();
+    MPI_Barrier(MPI_COMM_WORLD);
     end = MPI_Wtime();
 
     printf("Execution time: %f", end - start);
