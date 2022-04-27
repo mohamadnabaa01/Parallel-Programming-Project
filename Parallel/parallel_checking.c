@@ -18,8 +18,6 @@ occurrence_num nums[TOTAL_CHARS];
 int main(int argc, char **argv)
 {
     int rank = 0, size = 0;
-    int number_of_characters = 0;
-    int all_characters_checked = 0;
     for (int i = 0; i < TOTAL_CHARS; i++)
     {
         nums[i].character = (char)('a' + i);
@@ -35,6 +33,8 @@ int main(int argc, char **argv)
     start = MPI_Wtime();
 
     char *string;
+    int number_of_characters = 0;
+    int all_characters_checked = 0;
 
     if (rank == 0)
     {
@@ -54,8 +54,6 @@ int main(int argc, char **argv)
     MPI_Bcast(&number_of_characters, 1, MPI_INT, 0, MPI_COMM_WORLD);
     MPI_Bcast(string, number_of_characters, MPI_CHAR, 0, MPI_COMM_WORLD);
 
-    printf("%s\n", string);
-
     int num_of_chars_per_processor = number_of_characters / size;
 
     // MPI_Scatter(string, number_of_characters, MPI_CHAR, received_chars_per_processor, num_of_chars_per_processor, MPI_CHAR, 0, MPI_COMM_WORLD);
@@ -71,6 +69,7 @@ int main(int argc, char **argv)
         nums[index].occurrence++;
         all_characters_checked++;
     }
+    MPI_Bcast(&all_characters_checked, 1, MPI_INT, 0, MPI_COMM_WORLD);
 
     MPI_Barrier(MPI_COMM_WORLD);
     if (all_characters_checked == number_of_characters)
