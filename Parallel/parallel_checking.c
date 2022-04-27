@@ -58,13 +58,19 @@ int main(int argc, char **argv)
     int low = num_of_chars_per_processor * rank;
     int high = low + num_of_chars_per_processor - 1;
 
+    if(rank != 0)
+        MPI_Recv(&all_characters_checked, 1, MPI_INT, rank - 1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+
     for (int i = low; i <= high; i++)
     {
         int index = (int)string[i] - 'a';
         nums[index].occurrence++;
         all_characters_checked++;
     }
-    MPI_Bcast(&all_characters_checked, 1, MPI_INT, 0, MPI_COMM_WORLD);
+
+    if(rank != size - 1)
+        MPI_Send(&all_characters_checked, 1, MPI_INT, rank + 1, 0, MPI_COMM_WORLD);
+        
     printf("%d\n", all_characters_checked);
 
     MPI_Barrier(MPI_COMM_WORLD);
