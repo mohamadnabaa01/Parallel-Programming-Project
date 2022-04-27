@@ -40,7 +40,7 @@ int main(int argc, char **argv)
         string = (char*) malloc(sizeof(char) * number_of_characters);
         string = strdup(String);
         printf("The string is: %s\n", string);
-
+        printf("%s", string);
         for(int i = 0; i < 26; i++){
             nums[i].character = (char) ('a' + i);
             nums[i].occurrence = 0;
