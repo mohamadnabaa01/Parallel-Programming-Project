@@ -78,7 +78,6 @@ int main(int argc, char **argv)
     MPI_Barrier(MPI_COMM_WORLD);
     if (all_characters_checked == number_of_characters)
     {
-        printf("%d\n", all_characters_checked);
         for (int i = 0; i <= TOTAL_CHARS; i++)
         {
             printf("The char %c is repeated %d times in the string\n", nums[i].character, nums[i].occurrence);
