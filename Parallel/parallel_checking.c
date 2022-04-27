@@ -15,7 +15,6 @@ int main(int argc, char **argv)
 {
     int rank = 0, size = 0;
     int number_of_characters = 0;
-    char string[number_of_characters];
 
     MPI_Init(&argc, &argv);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
@@ -33,6 +32,7 @@ int main(int argc, char **argv)
             return -1;
         fscanf(file, "%d\n", &number_of_characters);
         printf("Length of string is: %d\n", number_of_characters);
+        char string[number_of_characters];
         fscanf(file, "%[^\n]\n", string); // read the contents of the file and put in string
         printf("The string is: %s\n", string);
 
