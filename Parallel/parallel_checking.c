@@ -32,6 +32,7 @@ int main(int argc, char **argv)
         return -1;
     fscanf(file, "%d\n", &number_of_characters);
     printf("Length of string is: %d\n", number_of_characters);
+    char* string;
     if (rank == 0)
     {
         for (int i = 0; i < 26; i++)
@@ -39,9 +40,9 @@ int main(int argc, char **argv)
             nums[i].character = (char)('a' + i);
             nums[i].occurrence = 0;
         }
+        string = (char *)malloc(sizeof(char) * number_of_characters);
+        fscanf(file, "%[^\n]\n", string); // read the contents of the file and put in string
     }
-    char *string = (char *)malloc(sizeof(char) * number_of_characters);
-    fscanf(file, "%[^\n]\n", string); // read the contents of the file and put in string
 
     int num_of_chars_per_processor = number_of_characters / size;
 
