@@ -25,7 +25,7 @@ int main(int argc, char **argv)
     double start, end;
     MPI_Barrier(MPI_COMM_WORLD);
     start = MPI_Wtime();
-    
+
     FILE *file;
     file = fopen("string.txt", "r"); // open the file fname
     if (!file)                       // if open failed
@@ -58,7 +58,7 @@ int main(int argc, char **argv)
     {
         for (int i = 0; i < 26; i++)
         {
-            printf("The char %c is repeated %d times in the string", nums[i].character, nums[i].occurrence);
+            printf("The char %c is repeated %d times in the string\n", nums[i].character, nums[i].occurrence);
         }
     }
 
