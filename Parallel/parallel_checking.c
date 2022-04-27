@@ -25,9 +25,7 @@ int main(int argc, char **argv)
     double start, end;
     MPI_Barrier(MPI_COMM_WORLD);
     start = MPI_Wtime();
-
-    char *string;
-
+    
     FILE *file;
     file = fopen("string.txt", "r"); // open the file fname
     if (!file)                       // if open failed
@@ -39,10 +37,8 @@ int main(int argc, char **argv)
         nums[i].character = (char)('a' + i);
         nums[i].occurrence = 0;
     }
-    char String[number_of_characters];
-    fscanf(file, "%[^\n]\n", String); // read the contents of the file and put in string
-    string = (char *)malloc(sizeof(char) * number_of_characters);
-    string = strdup(String);
+    char string[number_of_characters];
+    fscanf(file, "%[^\n]\n", string); // read the contents of the file and put in string
     printf("The string is: %s\n", string);
 
     int num_of_chars_per_processor = number_of_characters / size;
