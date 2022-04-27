@@ -47,8 +47,10 @@ int main(int argc, char **argv)
 
     printf("%s", string);
 
-    MPI_Scatter(string, number_of_characters, MPI_CHAR, received_chars_per_processor, num_of_chars_per_processor, MPI_CHAR, 0, MPI_COMM_WORLD);
+    // MPI_Scatter(string, number_of_characters, MPI_CHAR, received_chars_per_processor, num_of_chars_per_processor, MPI_CHAR, 0, MPI_COMM_WORLD);
 
+    MPI_Bcast(string, number_of_characters, MPI_CHAR, 0, MPI_COMM_WORLD);
+    
     int low = num_of_chars_per_processor * rank;
     int high = low + num_of_chars_per_processor * rank - 1;
 
