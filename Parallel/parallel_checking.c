@@ -51,6 +51,8 @@ int main(int argc, char **argv)
     MPI_Bcast(&number_of_characters, 1, MPI_INT, 0, MPI_COMM_WORLD);
     MPI_Bcast(string, number_of_characters, MPI_CHAR, 0, MPI_COMM_WORLD);
 
+    printf("%s\n", string);
+
     int num_of_chars_per_processor = number_of_characters / size;
 
     // MPI_Scatter(string, number_of_characters, MPI_CHAR, received_chars_per_processor, num_of_chars_per_processor, MPI_CHAR, 0, MPI_COMM_WORLD);
@@ -70,7 +72,7 @@ int main(int argc, char **argv)
 
     if(rank != size - 1)
         MPI_Send(&all_characters_checked, 1, MPI_INT, rank + 1, 0, MPI_COMM_WORLD);
-        
+
     printf("%d\n", all_characters_checked);
 
     MPI_Barrier(MPI_COMM_WORLD);
