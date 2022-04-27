@@ -24,6 +24,8 @@ int main(int argc, char **argv)
     MPI_Barrier(MPI_COMM_WORLD);
     start = MPI_Wtime();
 
+    char string[];
+
     if (rank == 0)
     {
         FILE *file;
@@ -32,8 +34,9 @@ int main(int argc, char **argv)
             return -1;
         fscanf(file, "%d\n", &number_of_characters);
         printf("Length of string is: %d\n", number_of_characters);
-        char string[number_of_characters];
-        fscanf(file, "%[^\n]\n", string); // read the contents of the file and put in string
+        char String[number_of_characters];
+        fscanf(file, "%[^\n]\n", String); // read the contents of the file and put in string
+        string = String;
         printf("The string is: %s\n", string);
 
         for(int i = 0; i < 26; i++){
