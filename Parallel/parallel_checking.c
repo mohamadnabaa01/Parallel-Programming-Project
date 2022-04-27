@@ -47,9 +47,12 @@ int main(int argc, char **argv)
 
     printf("%s", string);
 
-    MPI_Scatter(string, number_of_characters, MPI_CHARACTER, received_chars_per_processor, num_of_chars_per_processor, MPI_CHARACTER, 0, MPI_COMM_WORLD);
+    MPI_Scatter(string, number_of_characters, MPI_CHAR, received_chars_per_processor, num_of_chars_per_processor, MPI_CHAR, 0, MPI_COMM_WORLD);
 
-    for (int i = 0; i < num_of_chars_per_processor; i++)
+    int low = num_of_chars_per_processor * rank;
+    int high = low + num_of_chars_per_processor * rank - 1;
+
+    for (int i = low; i < high; i++)
     {
         int index = received_chars_per_processor[i] - 'a';
         nums[index].occurrence++;
