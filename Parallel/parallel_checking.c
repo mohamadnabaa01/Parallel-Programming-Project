@@ -26,27 +26,22 @@ int main(int argc, char **argv)
     MPI_Barrier(MPI_COMM_WORLD);
     start = MPI_Wtime();
 
-    FILE *file;
-    file = fopen("string.txt", "r"); // open the file fname
-    if (!file)                       // if open failed
-        return -1;
-    fscanf(file, "%d\n", &number_of_characters);
-    printf("Length of string is: %d\n", number_of_characters);
-    char* string;
     if (rank == 0)
     {
+        FILE *file;
+        file = fopen("string.txt", "r"); // open the file fname
+        if (!file)                       // if open failed
+            return -1;
+        fscanf(file, "%d\n", &number_of_characters);
+        printf("Length of string is: %d\n", number_of_characters);
+        char *string = (char *)malloc(sizeof(char) * number_of_characters);
         for (int i = 0; i < 26; i++)
         {
             nums[i].character = (char)('a' + i);
             nums[i].occurrence = 0;
         }
-        string = (char *)malloc(sizeof(char) * number_of_characters);
         fscanf(file, "%[^\n]\n", string); // read the contents of the file and put in string
     }
-
-    int num_of_chars_per_processor = number_of_characters / size;
-
-    char *received_chars_per_processor = (char *)malloc(sizeof(char) * num_of_chars_per_processor);
 
     // MPI_Scatter(string, number_of_characters, MPI_CHAR, received_chars_per_processor, num_of_chars_per_processor, MPI_CHAR, 0, MPI_COMM_WORLD);
 
