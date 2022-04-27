@@ -17,7 +17,12 @@ int main(int argc, char **argv)
 {
     int rank = 0, size = 0;
     int number_of_characters = 0;
-    char* string;
+    char *string;
+    for (int i = 0; i < 26; i++)
+    {
+        nums[i].character = (char)('a' + i);
+        nums[i].occurrence = 0;
+    }
 
     MPI_Init(&argc, &argv);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
@@ -29,23 +34,18 @@ int main(int argc, char **argv)
 
     if (rank == 0)
     {
-        for (int i = 0; i < 26; i++)
-        {
-            nums[i].character = (char)('a' + i);
-            printf("%c", nums[i].character);
-            nums[i].occurrence = 0;
-        }
         FILE *file;
         file = fopen("string.txt", "r"); // open the file fname
-        if (!file)                // if open failed
+        if (!file)                       // if open failed
             return -1;
         fscanf(file, "%d\n", &number_of_characters);
         printf("Length of string is: %d\n", number_of_characters);
-        string = (char*) malloc(sizeof(char) * number_of_characters);
+        string = (char *)malloc(sizeof(char) * number_of_characters);
         fscanf(file, "%[^\n]\n", string);
     }
-    else{
-        string = (char*) malloc(sizeof(char) * number_of_characters);
+    else
+    {
+        string = (char *)malloc(sizeof(char) * number_of_characters);
     }
 
     MPI_Bcast(string, number_of_characters, MPI_CHAR, 0, MPI_COMM_WORLD);
@@ -60,16 +60,13 @@ int main(int argc, char **argv)
     for (int i = low; i <= high; i++)
     {
         int index = (int)string[i] - 'a';
-        printf("Char %c has index of: %d\n", string[i], index);
         nums[index].occurrence++;
-        printf("%d\n", nums[index].occurrence);
     }
 
     if (rank == size - 1)
     {
         for (int i = 0; i < 26; i++)
         {
-            printf("Char is %c\n", nums[i].character);
             printf("The char %c is repeated %d times in the string\n", nums[i].character, nums[i].occurrence);
         }
     }
