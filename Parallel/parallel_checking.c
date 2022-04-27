@@ -54,7 +54,7 @@ int main(int argc, char **argv)
 
     // printf("%d %d", low, high);
 
-    for (int i = low; i < high; i++)
+    for (int i = low; i <= high; i++)
     {
         int index = received_chars_per_processor[i] - 'a';
         nums[index].occurrence++;
