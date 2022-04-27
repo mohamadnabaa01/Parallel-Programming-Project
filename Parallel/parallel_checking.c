@@ -68,6 +68,7 @@ int main(int argc, char **argv)
     {
         for (int i = 0; i < 26; i++)
         {
+            printf("%c\n", nums[i].character);
             printf("The char %c is repeated %d times in the string\n", nums[i].character, nums[i].occurrence);
         }
     }
