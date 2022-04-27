@@ -14,13 +14,11 @@ typedef struct OccurrenceCheck
 } occurrence_num;
 
 occurrence_num nums[TOTAL_CHARS];
+int all_characters_checked = 0;
 
 int main(int argc, char **argv)
 {
     int rank = 0, size = 0;
-    int number_of_characters = 0;
-    char *string;
-    int all_characters_checked = 0;
     for (int i = 0; i < TOTAL_CHARS; i++)
     {
         nums[i].character = (char)('a' + i);
@@ -39,9 +37,10 @@ int main(int argc, char **argv)
     file = fopen("string.txt", "r"); // open the file fname
     if (!file)                       // if open failed
         return -1;
+    int number_of_characters = 0;
     fscanf(file, "%d\n", &number_of_characters);
     printf("Length of string is: %d\n", number_of_characters);
-    string = (char *)malloc(sizeof(char) * number_of_characters);
+    char* string = (char *)malloc(sizeof(char) * number_of_characters);
     fscanf(file, "%[^\n]\n", string);
 
     MPI_Bcast(string, number_of_characters, MPI_CHAR, 0, MPI_COMM_WORLD);
