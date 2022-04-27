@@ -42,26 +42,26 @@ int main(int argc, char **argv)
         }
     }
 
-    // int num_of_chars_per_processor = number_of_characters / size;
+    int num_of_chars_per_processor = number_of_characters / size;
 
-    // char* received_chars_per_processor = (char*) malloc(sizeof(char) * num_of_chars_per_processor);
+    char* received_chars_per_processor = (char*) malloc(sizeof(char) * num_of_chars_per_processor);
 
-    // MPI_Scatter(string, number_of_characters, MPI_CHAR, received_chars_per_processor, num_of_chars_per_processor, MPI_CHAR, 0, MPI_COMM_WORLD);
+    MPI_Scatter(string, number_of_characters, MPI_CHAR, received_chars_per_processor, num_of_chars_per_processor, MPI_CHAR, 0, MPI_COMM_WORLD);
 
-    // for(int i = 0; i < num_of_chars_per_processor; i++){
-    //     int index = received_chars_per_processor[i] - 'a';
-    //     nums[index].occurrence++;
-    // }
+    for(int i = 0; i < num_of_chars_per_processor; i++){
+        int index = received_chars_per_processor[i] - 'a';
+        nums[index].occurrence++;
+    }
 
-    // if(rank == size - 1){
-    //     for(int i = 0; i < 26; i++){
-    //         printf("The char %c is repeated %d times in the string", nums[i].character, nums[i].occurrence);
-    //     }
-    // }
+    if(rank == size - 1){
+        for(int i = 0; i < 26; i++){
+            printf("The char %c is repeated %d times in the string", nums[i].character, nums[i].occurrence);
+        }
+    }
 
-    // MPI_Barrier(MPI_COMM_WORLD);
-    // end = MPI_Wtime();
+    MPI_Barrier(MPI_COMM_WORLD);
+    end = MPI_Wtime();
 
-    // printf("Execution time: %f", end - start);
+    printf("Execution time: %f", end - start);
     MPI_Finalize();
 }
