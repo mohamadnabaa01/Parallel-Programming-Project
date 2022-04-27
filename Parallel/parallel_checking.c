@@ -66,7 +66,7 @@ int main(int argc, char **argv)
     }
 
     MPI_Barrier(MPI_COMM_WORLD);
-    if (rank == size - 1)
+    if (rank == 0)
     {
         for (int i = 0; i <= TOTAL_CHARS; i++)
         {
