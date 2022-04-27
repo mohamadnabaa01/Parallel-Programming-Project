@@ -19,7 +19,6 @@ int main(int argc, char **argv)
 {
     int rank = 0, size = 0;
     int number_of_characters = 0;
-    char *string;
     int all_characters_checked = 0;
     for (int i = 0; i < TOTAL_CHARS; i++)
     {
@@ -34,6 +33,8 @@ int main(int argc, char **argv)
     double start, end;
     MPI_Barrier(MPI_COMM_WORLD);
     start = MPI_Wtime();
+
+    char *string;
 
     if (rank == 0)
     {
