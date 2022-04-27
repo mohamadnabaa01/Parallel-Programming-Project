@@ -61,6 +61,7 @@ int main(int argc, char **argv)
         int index = (int)string[i] - 'a';
         printf("Char %c has index of: %d\n", string[i], index);
         nums[index].occurrence++;
+        printf("%d\n", nums[i].occurrence);
     }
 
     if (rank == size - 1)
@@ -74,6 +75,6 @@ int main(int argc, char **argv)
     MPI_Barrier(MPI_COMM_WORLD);
     end = MPI_Wtime();
 
-    printf("Execution time: %f", end - start);
+    printf("Execution time: %f\n", end - start);
     MPI_Finalize();
 }
