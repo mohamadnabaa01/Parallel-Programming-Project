@@ -57,4 +57,10 @@ int main(int argc, char **argv)
             printf("The char %c is repeated %d times in the string", nums[i].character, nums[i].occurrence);
         }
     }
+
+    MPI_Barrier();
+    end = MPI_Wtime();
+
+    printf("Execution time: %f", end - start);
+    MPI_Finalize();
 }
