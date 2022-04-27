@@ -37,15 +37,14 @@ int main(int argc, char **argv)
         printf("Length of string is: %d\n", number_of_characters);
         char String[number_of_characters];
         fscanf(file, "%[^\n]\n", String); // read the contents of the file and put in string
-        string = (char*) malloc(sizeof(char) * number_of_characters);
-        string = strdup(String);
-        printf("The string is: %s\n", string);
-        printf("%s", string);
         for(int i = 0; i < 26; i++){
             nums[i].character = (char) ('a' + i);
             nums[i].occurrence = 0;
         }
     }
+    string = (char*) malloc(sizeof(char) * number_of_characters);
+    string = strdup(String);
+    printf("The string is: %s\n", string);
 
     int num_of_chars_per_processor = number_of_characters / size;
 
