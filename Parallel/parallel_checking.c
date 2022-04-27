@@ -58,8 +58,6 @@ int main(int argc, char **argv)
     int low = num_of_chars_per_processor * rank;
     int high = low + num_of_chars_per_processor - 1;
 
-    printf("%d\n", number_of_characters);
-
     for (int i = low; i <= high; i++)
     {
         int index = (int)string[i] - 'a';
@@ -67,6 +65,7 @@ int main(int argc, char **argv)
         all_characters_checked++;
     }
     MPI_Bcast(&all_characters_checked, 1, MPI_INT, 0, MPI_COMM_WORLD);
+    printf("%d\n", all_characters_checked);
 
     MPI_Barrier(MPI_COMM_WORLD);
     if (all_characters_checked == number_of_characters)
