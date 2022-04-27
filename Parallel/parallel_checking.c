@@ -34,22 +34,15 @@ int main(int argc, char **argv)
     double start, end;
     MPI_Barrier(MPI_COMM_WORLD);
     start = MPI_Wtime();
-
-    if (rank == 0)
-    {
-        FILE *file;
-        file = fopen("string.txt", "r"); // open the file fname
-        if (!file)                       // if open failed
-            return -1;
-        fscanf(file, "%d\n", &number_of_characters);
-        printf("Length of string is: %d\n", number_of_characters);
-        string = (char *)malloc(sizeof(char) * number_of_characters);
-        fscanf(file, "%[^\n]\n", string);
-    }
-    else
-    {
-        string = (char *)malloc(sizeof(char) * number_of_characters);
-    }
+    
+    FILE *file;
+    file = fopen("string.txt", "r"); // open the file fname
+    if (!file)                       // if open failed
+        return -1;
+    fscanf(file, "%d\n", &number_of_characters);
+    printf("Length of string is: %d\n", number_of_characters);
+    string = (char *)malloc(sizeof(char) * number_of_characters);
+    fscanf(file, "%[^\n]\n", string);
 
     MPI_Bcast(string, number_of_characters, MPI_CHAR, 0, MPI_COMM_WORLD);
 
