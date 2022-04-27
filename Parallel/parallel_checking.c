@@ -50,7 +50,7 @@ int main(int argc, char **argv)
 
     // printf("I am rank %d and i have: %s\n", rank, string);
     int low = num_of_chars_per_processor * rank;
-    int high = low + num_of_chars_per_processor * rank - 1;
+    int high = low + num_of_chars_per_processor- 1;
 
     printf("%d %d", low, high);
 
