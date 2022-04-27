@@ -37,7 +37,7 @@ int main(int argc, char **argv)
         printf("Length of string is: %d\n", number_of_characters);
         char String[number_of_characters];
         fscanf(file, "%[^\n]\n", String); // read the contents of the file and put in string
-        strcpy(string, String);
+        string = strdup(String);
         printf("The string is: %s\n", string);
 
         for(int i = 0; i < 26; i++){
