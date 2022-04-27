@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <stddef.h>
+#include <string.h>
 
 typedef struct OccurrenceCheck{
     char character;
