@@ -24,7 +24,7 @@ int main(int argc, char **argv)
     MPI_Barrier(MPI_COMM_WORLD);
     start = MPI_Wtime();
 
-    char string[];
+    char string[1000];
 
     if (rank == 0)
     {
