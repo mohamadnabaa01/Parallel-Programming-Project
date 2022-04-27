@@ -11,23 +11,13 @@ typedef struct OccurrenceCheck
     int occurrence;
 } occurrence_num;
 
-int *open_file(char *fname)
-{
-    FILE *file;
-    file = fopen(fname, "r"); // open the file fname
-    if (!file)                // if open failed
-        return -1;
-    int number_of_characters = 0;
-    fscanf(file, "%d\n", &number_of_characters);
-    printf("Length of string is: %d\n", number_of_characters);
-    return &number_of_characters;
-}
-
 occurrence_num nums[26];
 
 int main(int argc, char **argv)
 {
     int rank = 0, size = 0;
+    int number_of_characters = 0;
+    char* string;
 
     MPI_Init(&argc, &argv);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
@@ -37,8 +27,6 @@ int main(int argc, char **argv)
     MPI_Barrier(MPI_COMM_WORLD);
     start = MPI_Wtime();
 
-    char *string;
-
     if (rank == 0)
     {
         for (int i = 0; i < 26; i++)
@@ -46,10 +34,18 @@ int main(int argc, char **argv)
             nums[i].character = (char)('a' + i);
             nums[i].occurrence = 0;
         }
+        FILE *file;
+        file = fopen("string.txt", "r"); // open the file fname
+        if (!file)                // if open failed
+            return -1;
+        fscanf(file, "%d\n", &number_of_characters);
+        printf("Length of string is: %d\n", number_of_characters);
+        string = (char*) malloc(sizeof(char) * number_of_characters);
+        fscanf(file, "%[^\n]\n", string);
     }
-    int number_of_characters = open_file("string.txt");
-    string = (char *)malloc(sizeof(char) * number_of_characters);
-    fscanf(file, "%[^\n]\n", string); // read the contents of the file and put in string
+    else{
+        string = (char*) malloc(sizeof(char) * number_of_characters);
+    }
 
     MPI_Bcast(string, number_of_characters, MPI_CHAR, 0, MPI_COMM_WORLD);
 
