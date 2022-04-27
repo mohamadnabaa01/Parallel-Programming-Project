@@ -60,7 +60,7 @@ int main(int argc, char **argv)
     for (int i = low; i <= high; i++)
     {
         int index = (int)string[i] - 'a';
-        printf("%d", index);
+        printf("%d\n", index);
         nums[index].occurrence++;
     }
 
