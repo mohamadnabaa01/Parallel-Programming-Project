@@ -62,6 +62,7 @@ int main(int argc, char **argv)
         int index = (int)string[i] - 'a';
         printf("%d\n", index);
         nums[index].occurrence++;
+        printf("occurrenc: %d\n", nums[index].occurrence);
     }
 
     if (rank == size - 1)
