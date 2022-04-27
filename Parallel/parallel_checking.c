@@ -32,6 +32,7 @@ int main(int argc, char **argv)
         for (int i = 0; i < 26; i++)
         {
             nums[i].character = (char)('a' + i);
+            printf("%c", nums[i].character);
             nums[i].occurrence = 0;
         }
         FILE *file;
