@@ -47,7 +47,7 @@ int main(int argc, char **argv)
 
     printf("%s", string);
 
-    MPI_Scatter(string, &number_of_characters, MPI_CHAR, received_chars_per_processor, &num_of_chars_per_processor, MPI_CHAR, 0, MPI_COMM_WORLD);
+    MPI_Scatter(string, number_of_characters, MPI_CHAR*, received_chars_per_processor, num_of_chars_per_processor, MPI_CHAR*, 0, MPI_COMM_WORLD);
 
     for (int i = 0; i < num_of_chars_per_processor; i++)
     {
