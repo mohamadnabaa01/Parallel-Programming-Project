@@ -15,7 +15,7 @@ int main(void)
     int string_length = 0;
     fscanf(file, "%d\n", &string_length);
     printf("Length of string is: %d\n", string_length);
-    char string[string_length + 1];
+    char string[string_length];
     fscanf(file, "%[^\n]\n", string); // read the contents of the file and put in string
     printf("The string is: %s\n", string);
 
