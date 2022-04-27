@@ -56,10 +56,10 @@ int main(int argc, char **argv)
 
     for (int i = low; i <= high; i++)
     {
-      //  int index = (int) (received_chars_per_processor[i] - 'a');
+      int index = (int) (received_chars_per_processor[i]);
         printf("jhhh");
-     //   nums[index].occurrence++;
-      //  printf("%d", index);
+       // nums[index].occurrence++;
+        printf("%d", index);
     }
 
     // if (rank == size - 1)
