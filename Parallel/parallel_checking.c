@@ -44,8 +44,6 @@ int main(int argc, char **argv)
     string = (char *)malloc(sizeof(char) * number_of_characters);
     fscanf(file, "%[^\n]\n", string);
 
-    printf("%s", string);
-
     MPI_Bcast(string, number_of_characters, MPI_CHAR, 0, MPI_COMM_WORLD);
 
     int num_of_chars_per_processor = number_of_characters / size;
@@ -60,6 +58,7 @@ int main(int argc, char **argv)
         int index = (int)string[i] - 'a';
         nums[index].occurrence++;
         all_characters_checked++;
+        printf("%d\n", all_characters_checked);
     }
 
     MPI_Barrier(MPI_COMM_WORLD);
