@@ -31,7 +31,7 @@ int main(int argc, char **argv)
     {
         for (int i = 0; i < 26; i++)
         {
-            nums[i].character = (char)((int)'a' + i);
+            nums[i].character = (char)('a' + i);
             nums[i].occurrence = 0;
         }
         FILE *file;
