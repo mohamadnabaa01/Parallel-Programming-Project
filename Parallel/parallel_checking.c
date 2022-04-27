@@ -14,11 +14,13 @@ typedef struct OccurrenceCheck
 } occurrence_num;
 
 occurrence_num nums[TOTAL_CHARS];
-int all_characters_checked = 0;
 
 int main(int argc, char **argv)
 {
     int rank = 0, size = 0;
+    int number_of_characters = 0;
+    char *string;
+    int all_characters_checked = 0;
     for (int i = 0; i < TOTAL_CHARS; i++)
     {
         nums[i].character = (char)('a' + i);
@@ -33,17 +35,25 @@ int main(int argc, char **argv)
     MPI_Barrier(MPI_COMM_WORLD);
     start = MPI_Wtime();
 
-    FILE *file;
-    file = fopen("string.txt", "r"); // open the file fname
-    if (!file)                       // if open failed
-        return -1;
-    int number_of_characters = 0;
-    fscanf(file, "%d\n", &number_of_characters);
-    printf("Length of string is: %d\n", number_of_characters);
-    char* string = (char *)malloc(sizeof(char) * number_of_characters);
-    fscanf(file, "%[^\n]\n", string);
+    if (rank == 0)
+    {
+        FILE *file;
+        file = fopen("string.txt", "r"); // open the file fname
+        if (!file)                       // if open failed
+            return -1;
+        fscanf(file, "%d\n", &number_of_characters);
+        printf("Length of string is: %d\n", number_of_characters);
+        string = (char *)malloc(sizeof(char) * number_of_characters);
+        fscanf(file, "%[^\n]\n", string);
+    }
+    else
+    {
+        string = (char *)malloc(sizeof(char) * number_of_characters);
+    }
 
     MPI_Bcast(string, number_of_characters, MPI_CHAR, 0, MPI_COMM_WORLD);
+
+    printf("%s\n", string);
 
     int num_of_chars_per_processor = number_of_characters / size;
 
@@ -52,12 +62,13 @@ int main(int argc, char **argv)
     int low = num_of_chars_per_processor * rank;
     int high = low + num_of_chars_per_processor - 1;
 
+    printf("%d\n", number_of_characters);
+
     for (int i = low; i <= high; i++)
     {
         int index = (int)string[i] - 'a';
         nums[index].occurrence++;
         all_characters_checked++;
-        printf("%d\n", all_characters_checked);
     }
 
     MPI_Barrier(MPI_COMM_WORLD);
