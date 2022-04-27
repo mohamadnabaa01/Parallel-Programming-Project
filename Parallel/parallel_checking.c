@@ -34,7 +34,7 @@ int main(int argc, char **argv)
     double start, end;
     MPI_Barrier(MPI_COMM_WORLD);
     start = MPI_Wtime();
-    
+
     FILE *file;
     file = fopen("string.txt", "r"); // open the file fname
     if (!file)                       // if open failed
@@ -44,6 +44,8 @@ int main(int argc, char **argv)
     string = (char *)malloc(sizeof(char) * number_of_characters);
     fscanf(file, "%[^\n]\n", string);
 
+    printf("%s", string);
+
     MPI_Bcast(string, number_of_characters, MPI_CHAR, 0, MPI_COMM_WORLD);
 
     int num_of_chars_per_processor = number_of_characters / size;
@@ -52,8 +54,6 @@ int main(int argc, char **argv)
 
     int low = num_of_chars_per_processor * rank;
     int high = low + num_of_chars_per_processor - 1;
-
-    printf("%d\n", number_of_characters);
 
     for (int i = low; i <= high; i++)
     {
