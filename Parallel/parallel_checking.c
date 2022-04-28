@@ -44,41 +44,38 @@ int main(int argc, char **argv)
     double start, end;
     printf("Before barrier rank %d\n\n", rank);
 
-    MPI_Barrier(MPI_COMM_WORLD);
-
     printf("After barrier rank %d\n", rank);
     start = MPI_Wtime();
 
-    // MPI_Bcast(&number_of_characters, 1, MPI_INT, 0, MPI_COMM_WORLD);
-    // MPI_Bcast(string, number_of_characters, MPI_CHAR, 0, MPI_COMM_WORLD);
+    MPI_Bcast(&number_of_characters, 1, MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Bcast(string, number_of_characters, MPI_CHAR, 0, MPI_COMM_WORLD);
 
-    // int num_of_chars_per_processor = number_of_characters / size;
+    int num_of_chars_per_processor = number_of_characters / size;
 
-    // // MPI_Scatter(string, number_of_characters, MPI_CHAR, received_chars_per_processor, num_of_chars_per_processor, MPI_CHAR, 0, MPI_COMM_WORLD);
+    // MPI_Scatter(string, number_of_characters, MPI_CHAR, received_chars_per_processor, num_of_chars_per_processor, MPI_CHAR, 0, MPI_COMM_WORLD);
 
-    // int low = num_of_chars_per_processor * rank;
-    // int high = low + num_of_chars_per_processor - 1;
+    int low = num_of_chars_per_processor * rank;
+    int high = low + num_of_chars_per_processor - 1;
 
-    // for (int i = low; i <= high; i++)
-    // {
-    //     int index = (int)string[i] - 'a';
-    //     nums[index].occurrence+=1;
-    // }
+    for (int i = low; i <= high; i++)
+    {
+        int index = (int)string[i] - 'a';
+        nums[index].occurrence+=1;
+    }
 
+    MPI_Barrier(MPI_COMM_WORLD);
+    if (rank == 0)
+    {
+        for (int i = 0; i <= TOTAL_CHARS; i++)
+        {
+            printf("The char %c is repeated %d times in the string\n", nums[i].character, nums[i].occurrence);
+        }
+    }
+    end = MPI_Wtime();
 
-    // MPI_Barrier(MPI_COMM_WORLD);
-    // if (rank == 0)
-    // {
-    //     for (int i = 0; i <= TOTAL_CHARS; i++)
-    //     {
-    //         printf("The char %c is repeated %d times in the string\n", nums[i].character, nums[i].occurrence);
-    //     }
-    // }
-    // end = MPI_Wtime();
-
-    // if (rank == 0)
-    // {
-    //     printf("Execution time: %f\n", end - start);
-    // }
+    if (rank == 0)
+    {
+        printf("Execution time: %f\n", end - start);
+    }
     MPI_Finalize();
 }
