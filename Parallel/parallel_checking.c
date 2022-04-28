@@ -49,7 +49,6 @@ int main(int argc, char **argv)
     printf("rank %d\n", rank);
     start = MPI_Wtime();
 
-    MPI_Bcast(nums, TOTAL_CHARS,)
     MPI_Bcast(&number_of_characters, 1, MPI_INT, 0, MPI_COMM_WORLD);
     MPI_Bcast(string, number_of_characters, MPI_CHAR, 0, MPI_COMM_WORLD);
 
