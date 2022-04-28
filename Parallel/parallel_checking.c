@@ -26,34 +26,30 @@ int main(int argc, char **argv)
         nums[i].character = (char)('a' + i);
         nums[i].occurrence = 0;
     }
+    
+    double start, end;
+    MPI_Barrier(MPI_COMM_WORLD);
+    start = MPI_Wtime();
+
     char *string;
     int number_of_characters = 0;
 
-    if (rank == 0)
-    {
-        FILE *file;
-        file = fopen("string.txt", "r"); // open the file fname
-        if (!file)                       // if open failed
-            return -1;
-        fscanf(file, "%d\n", &number_of_characters);
-        printf("Length of string is: %d\n", number_of_characters);
-        string = (char *)malloc(sizeof(char) * number_of_characters);
-        fscanf(file, "%[^\n]\n", string);
-    }
-
-    double start, end;
-    MPI_Barrier(MPI_COMM_WORLD);
-
-    printf("After barrier rank %d\n", rank);
-    start = MPI_Wtime();
+    FILE *file;
+    file = fopen("string.txt", "r"); // open the file fname
+    if (!file)                       // if open failed
+        return -1;
+    fscanf(file, "%d\n", &number_of_characters);
+    printf("Length of string is: %d\n", number_of_characters);
+    string = (char *)malloc(sizeof(char) * number_of_characters);
+    fscanf(file, "%[^\n]\n", string);
 
     // MPI_Bcast(&number_of_characters, 1, MPI_INT, 0, MPI_COMM_WORLD);
     // MPI_Bcast(string, number_of_characters, MPI_CHAR, 0, MPI_COMM_WORLD);
 
     int num_of_chars_per_processor = number_of_characters / size;
 
-    char* received_chars_per_processor = (char*) malloc(sizeof(char) * num_of_chars_per_processor);
-    
+    char *received_chars_per_processor = (char *)malloc(sizeof(char) * num_of_chars_per_processor);
+
     MPI_Scatter(string, number_of_characters, MPI_CHAR, received_chars_per_processor, num_of_chars_per_processor, MPI_CHAR, 0, MPI_COMM_WORLD);
 
     // int low = num_of_chars_per_processor * rank;
