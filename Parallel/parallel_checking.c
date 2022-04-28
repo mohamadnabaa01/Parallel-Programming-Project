@@ -6,23 +6,15 @@
 
 #define TOTAL_CHARS 26
 
-// typedef struct OccurrenceCheck
-// {
-//     char character;
-//     int occurrence;
-// } occurrence_num;
-
 int main(int argc, char **argv)
 {
     int rank = 0, size = 0;
-    // occurrence_num nums[TOTAL_CHARS];
 
     MPI_Init(&argc, &argv);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
 
-    int chars_occurrences[TOTAL_CHARS];
-
+    int* chars_occurrences = (int*) malloc(sizeof(int) * TOTAL_CHARS);
     MPI_Barrier(MPI_COMM_WORLD);
 
     double start = MPI_Wtime();
