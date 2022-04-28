@@ -57,17 +57,20 @@ int main(int argc, char **argv)
             // nums[index].occurrence++;
         }
 
-        MPI_Barrier(MPI_COMM_WORLD);
-        printf("Rank %d:\n", rank);
-        for (int i = 0; i < TOTAL_CHARS; i++)
+        int barrier2 = MPI_Barrier(MPI_COMM_WORLD);
+        if (barrier2 == 0)
         {
-            printf("The char %c is repeated %d times in the string\n", (char)i + 'a', chars_occurrences[i]);
-        }
+            printf("Rank %d:\n", rank);
+            for (int i = 0; i < TOTAL_CHARS; i++)
+            {
+                printf("The char %c is repeated %d times in the string\n", (char)i + 'a', chars_occurrences[i]);
+            }
 
-        if (rank == 0)
-        {
-            double end = MPI_Wtime();
-            printf("Execution time: %f\n", end - start);
+            if (rank == 0)
+            {
+                double end = MPI_Wtime();
+                printf("Execution time: %f\n", end - start);
+            }
         }
     }
 
