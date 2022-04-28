@@ -27,7 +27,6 @@ int main(int argc, char **argv)
         nums[i].occurrence = 0;
     }
 
-    MPI_Barrier(MPI_COMM_WORLD);
     double start = MPI_Wtime();
 
     char *string;
@@ -55,6 +54,8 @@ int main(int argc, char **argv)
         int index = (int)string[i] - 'a';
         nums[index].occurrence++;
     }
+
+    MPI_Barrier(MPI_COMM_WORLD);
 
     if (rank == 0)
     {
