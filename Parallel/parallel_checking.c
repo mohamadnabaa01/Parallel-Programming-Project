@@ -21,16 +21,13 @@ int main(int argc, char **argv)
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
 
-    // for (int i = 0; i < TOTAL_CHARS; i++)
-    // {
-    //     nums[i].character = (char)('a' + i);
-    //     nums[i].occurrence = 0;
-    // }
     int chars_occurrences[TOTAL_CHARS];
+    for(int i = 0; i<TOTAL_CHARS; i++){
+        chars_occurrences[i] = 0;
+    }
     MPI_Barrier(MPI_COMM_WORLD);
     double start = MPI_Wtime();
 
-    char *string;
     int number_of_characters = 0;
 
     FILE *file;
@@ -39,7 +36,7 @@ int main(int argc, char **argv)
         return -1;
     fscanf(file, "%d\n", &number_of_characters);
     printf("Length of string is: %d\n", number_of_characters);
-    string = (char *)malloc(sizeof(char) * number_of_characters);
+    char* string = (char *)malloc(sizeof(char) * number_of_characters);
     fscanf(file, "%[^\n]\n", string);
 
     // MPI_Bcast(&number_of_characters, 1, MPI_INT, 0, MPI_COMM_WORLD);
@@ -59,7 +56,7 @@ int main(int argc, char **argv)
 
     MPI_Barrier(MPI_COMM_WORLD);
     printf("Rank %d:\n", rank);
-    for (int i = 0; i <= TOTAL_CHARS; i++)
+    for (int i = 0; i < TOTAL_CHARS; i++)
     {
         printf("The char %c is repeated %d times in the string\n", (char) i + 'a', chars_occurrences[i]);
     }
