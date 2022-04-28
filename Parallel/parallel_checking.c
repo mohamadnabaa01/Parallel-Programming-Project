@@ -54,8 +54,6 @@ int main(int argc, char **argv)
     MPI_Bcast(&number_of_characters, 1, MPI_INT, 0, MPI_COMM_WORLD);
     MPI_Bcast(string, number_of_characters, MPI_CHAR, 0, MPI_COMM_WORLD);
 
-    printf("String is: %s", string);
-
     int num_of_chars_per_processor = number_of_characters / size;
 
     // MPI_Scatter(string, number_of_characters, MPI_CHAR, received_chars_per_processor, num_of_chars_per_processor, MPI_CHAR, 0, MPI_COMM_WORLD);
@@ -66,6 +64,7 @@ int main(int argc, char **argv)
     for (int i = low; i <= high; i++)
     {
         int index = (int)string[i] - 'a';
+        MPI_Wait(1);
         nums[index].occurrence++;
     }
 
