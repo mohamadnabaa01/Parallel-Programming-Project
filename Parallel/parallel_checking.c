@@ -42,25 +42,27 @@ int main(int argc, char **argv)
     }
 
     double start, end;
-    printf("Before barrier rank %d\n\n", rank);
+    MPI_Barrier(MPI_COMM_WORLD);
 
     printf("After barrier rank %d\n", rank);
     start = MPI_Wtime();
 
-    MPI_Bcast(&number_of_characters, 1, MPI_INT, 0, MPI_COMM_WORLD);
-    MPI_Bcast(string, number_of_characters, MPI_CHAR, 0, MPI_COMM_WORLD);
+    // MPI_Bcast(&number_of_characters, 1, MPI_INT, 0, MPI_COMM_WORLD);
+    // MPI_Bcast(string, number_of_characters, MPI_CHAR, 0, MPI_COMM_WORLD);
 
     int num_of_chars_per_processor = number_of_characters / size;
 
-    // MPI_Scatter(string, number_of_characters, MPI_CHAR, received_chars_per_processor, num_of_chars_per_processor, MPI_CHAR, 0, MPI_COMM_WORLD);
+    char* received_chars_per_processor = (char*) malloc(sizeof(char) * num_of_chars_per_processor);
+    
+    MPI_Scatter(string, number_of_characters, MPI_CHAR, received_chars_per_processor, num_of_chars_per_processor, MPI_CHAR, 0, MPI_COMM_WORLD);
 
-    int low = num_of_chars_per_processor * rank;
-    int high = low + num_of_chars_per_processor - 1;
+    // int low = num_of_chars_per_processor * rank;
+    // int high = low + num_of_chars_per_processor - 1;
 
-    for (int i = low; i <= high; i++)
+    for (int i = 0; i < num_of_chars_per_processor; i++)
     {
-        int index = (int)string[i] - 'a';
-        nums[index].occurrence+=1;
+        int index = (int)received_chars_per_processor[i] - 'a';
+        nums[index].occurrence++;
     }
 
     MPI_Barrier(MPI_COMM_WORLD);
