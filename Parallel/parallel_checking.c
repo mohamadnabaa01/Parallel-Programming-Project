@@ -30,6 +30,7 @@ int main(int argc, char **argv)
             nums[i].character = (char)('a' + i);
             nums[i].occurrence = 0;
         }
+        printf("Hi");
     }
 
     double start, end;
