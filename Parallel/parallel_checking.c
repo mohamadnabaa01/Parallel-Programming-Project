@@ -43,10 +43,11 @@ int main(int argc, char **argv)
     }
 
     double start, end;
-    printf("rank %d\n\n", rank);
+    printf("Before barrier rank %d\n\n", rank);
+
     MPI_Barrier(MPI_COMM_WORLD);
 
-    printf("rank %d\n", rank);
+    printf("After barrier rank %d\n", rank);
     start = MPI_Wtime();
 
     MPI_Bcast(&number_of_characters, 1, MPI_INT, 0, MPI_COMM_WORLD);
