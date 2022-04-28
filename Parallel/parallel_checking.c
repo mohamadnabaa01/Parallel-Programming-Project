@@ -53,7 +53,7 @@ int main(int argc, char **argv)
 
     for (int i = low; i < high; i++)
     {
-        int index = (int)received_chars_per_processor[i] - 'a';
+        int index = (int)string[i] - 'a';
         nums[index].occurrence++;
     }
 
