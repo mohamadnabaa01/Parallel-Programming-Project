@@ -22,10 +22,7 @@ int main(int argc, char **argv)
     MPI_Comm_size(MPI_COMM_WORLD, &size);
 
     int chars_occurrences[TOTAL_CHARS];
-    for (int i = 0; i < TOTAL_CHARS; i++)
-    {
-        chars_occurrences[i] = 0;
-    }
+
     MPI_Barrier(MPI_COMM_WORLD);
 
     double start = MPI_Wtime();
