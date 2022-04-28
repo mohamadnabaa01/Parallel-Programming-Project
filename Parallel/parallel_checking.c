@@ -10,7 +10,7 @@
 typedef struct OccurrenceCheck
 {
     char character;
-    int occurrence : 0;
+    int occurrence;
 } occurrence_num;
 
 occurrence_num nums[TOTAL_CHARS];
@@ -18,9 +18,13 @@ occurrence_num nums[TOTAL_CHARS];
 int main(int argc, char **argv)
 {
     int rank = 0, size = 0;
-    for (int i = 0; i < TOTAL_CHARS; i++)
+    if (rank == 0)
     {
-        nums[i].character = (char)('a' + i);
+        for (int i = 0; i < TOTAL_CHARS; i++)
+        {
+            nums[i].character = (char)('a' + i);
+            nums[i].occurrence = 0;
+        }
     }
 
     MPI_Init(&argc, &argv);
@@ -46,7 +50,7 @@ int main(int argc, char **argv)
         string = (char *)malloc(sizeof(char) * number_of_characters);
         fscanf(file, "%[^\n]\n", string);
     }
-   
+
     MPI_Bcast(&number_of_characters, 1, MPI_INT, 0, MPI_COMM_WORLD);
     MPI_Bcast(string, number_of_characters, MPI_CHAR, 0, MPI_COMM_WORLD);
 
