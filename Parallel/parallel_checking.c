@@ -13,7 +13,6 @@ typedef struct OccurrenceCheck
     int occurrence;
 } occurrence_num;
 
-
 int main(int argc, char **argv)
 {
     int rank = 0, size = 0;
@@ -46,6 +45,13 @@ int main(int argc, char **argv)
     double start, end;
     printf("rank %d\n\n", rank);
     MPI_Barrier(MPI_COMM_WORLD);
+    if (rank == 1)
+    {
+        for (int i = 0; i < TOTAL_CHARS; i++)
+        {
+            printf("%d\n", nums[i].occurrence);
+        }
+    }
     printf("rank %d\n", rank);
     start = MPI_Wtime();
 
