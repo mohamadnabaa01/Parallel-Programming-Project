@@ -60,14 +60,14 @@ int main(int argc, char **argv)
     int low = num_of_chars_per_processor * rank;
     int high = low + num_of_chars_per_processor - 1;
 
+    MPI_Bcast(&all_characters_checked, 1, MPI_INT, 0, MPI_COMM_WORLD);
+
     for (int i = low; i <= high; i++)
     {
         int index = (int)string[i] - 'a';
         nums[index].occurrence++;
         all_characters_checked++;
     }
-
-    MPI_Bcast(&all_characters_checked, 1, MPI_INT, 0, MPI_COMM_WORLD);
 
     printf("%d\n", all_characters_checked);
 
