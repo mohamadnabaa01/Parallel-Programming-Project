@@ -78,6 +78,9 @@ int main(int argc, char **argv)
     }
     end = MPI_Wtime();
 
-    printf("Execution time: %f\n", end - start);
+    if (rank == 0)
+    {
+        printf("Execution time: %f\n", end - start);
+    }
     MPI_Finalize();
 }
