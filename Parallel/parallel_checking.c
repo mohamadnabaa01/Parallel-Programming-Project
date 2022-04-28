@@ -23,6 +23,10 @@ int main(int argc, char **argv)
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
 
+    double start, end;
+    MPI_Barrier(MPI_COMM_WORLD);
+    start = MPI_Wtime();
+
     if (rank == 0)
     {
         for (int i = 0; i < TOTAL_CHARS; i++)
@@ -30,12 +34,7 @@ int main(int argc, char **argv)
             nums[i].character = (char)('a' + i);
             nums[i].occurrence = 0;
         }
-        printf("Hi");
     }
-
-    double start, end;
-    MPI_Barrier(MPI_COMM_WORLD);
-    start = MPI_Wtime();
 
     char *string;
     int number_of_characters = 0;
