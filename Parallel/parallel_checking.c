@@ -10,7 +10,7 @@
 typedef struct OccurrenceCheck
 {
     char character;
-    int occurrence = 0;
+    int occurrence : 0;
 } occurrence_num;
 
 occurrence_num nums[TOTAL_CHARS];
