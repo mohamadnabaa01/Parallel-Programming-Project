@@ -65,7 +65,7 @@ int main(int argc, char **argv)
     {
         int index = (int)string[i] - 'a';
         nums[index].occurrence++;
-        printf("Rank %d occurrence %d", nums[index].occurrence);
+        printf("Rank %d occurrence %d\n", rank, nums[index].occurrence);
     }
 
     MPI_Barrier(MPI_COMM_WORLD);
