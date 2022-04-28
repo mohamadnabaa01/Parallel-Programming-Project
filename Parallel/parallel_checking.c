@@ -10,7 +10,7 @@
 typedef struct OccurrenceCheck
 {
     char character;
-    int occurrence;
+    int occurrence = 0;
 } occurrence_num;
 
 occurrence_num nums[TOTAL_CHARS];
@@ -21,9 +21,7 @@ int main(int argc, char **argv)
     for (int i = 0; i < TOTAL_CHARS; i++)
     {
         nums[i].character = (char)('a' + i);
-        nums[i].occurrence = 0;
     }
-    printf("Hello");
 
     MPI_Init(&argc, &argv);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
