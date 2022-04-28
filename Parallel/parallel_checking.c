@@ -38,7 +38,6 @@ int main(int argc, char **argv)
 
     char *string;
     int number_of_characters = 0;
-    int all_characters_checked = 0;
 
     if (rank == 0)
     {
@@ -54,6 +53,8 @@ int main(int argc, char **argv)
 
     MPI_Bcast(&number_of_characters, 1, MPI_INT, 0, MPI_COMM_WORLD);
     MPI_Bcast(string, number_of_characters, MPI_CHAR, 0, MPI_COMM_WORLD);
+
+    printf("String is: %s", string);
 
     int num_of_chars_per_processor = number_of_characters / size;
 
