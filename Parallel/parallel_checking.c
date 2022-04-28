@@ -49,6 +49,7 @@ int main(int argc, char **argv)
     printf("rank %d\n", rank);
     start = MPI_Wtime();
 
+    MPI_Bcast(nums, TOTAL_CHARS,)
     MPI_Bcast(&number_of_characters, 1, MPI_INT, 0, MPI_COMM_WORLD);
     MPI_Bcast(string, number_of_characters, MPI_CHAR, 0, MPI_COMM_WORLD);
 
@@ -62,13 +63,9 @@ int main(int argc, char **argv)
     for (int i = low; i <= high; i++)
     {
         int index = (int)string[i] - 'a';
-        nums[index].occurrence++;
+        nums[index].occurrence+=1;
     }
 
-    for (int i = 0; i < TOTAL_CHARS; i++)
-    {
-        printf("%d\n", nums[i].occurrence);
-    }
 
     MPI_Barrier(MPI_COMM_WORLD);
     if (rank == 0)
