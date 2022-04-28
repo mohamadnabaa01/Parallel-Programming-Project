@@ -26,14 +26,8 @@ int main(int argc, char **argv)
     for (int i = 0; i < TOTAL_CHARS; i++)
     {
         nums[i].character = (char)('a' + i);
-        if(rank == 0)
-            nums[i].occurrence = 0;
+        nums[i].occurrence = 0;
     }
-
-    double start, end;
-    MPI_Barrier(MPI_COMM_WORLD);
-    start = MPI_Wtime();
-
     char *string;
     int number_of_characters = 0;
 
@@ -49,6 +43,10 @@ int main(int argc, char **argv)
         fscanf(file, "%[^\n]\n", string);
     }
 
+    double start, end;
+    MPI_Barrier(MPI_COMM_WORLD);
+    start = MPI_Wtime();
+
     MPI_Bcast(&number_of_characters, 1, MPI_INT, 0, MPI_COMM_WORLD);
     MPI_Bcast(string, number_of_characters, MPI_CHAR, 0, MPI_COMM_WORLD);
 
@@ -63,11 +61,10 @@ int main(int argc, char **argv)
     {
         int index = (int)string[i] - 'a';
         nums[index].occurrence++;
-        printf("Rank %d occurrence %d\n", rank, nums[index].occurrence);
     }
 
     MPI_Barrier(MPI_COMM_WORLD);
-    if (rank == size - 1)
+    if (rank == 0)
     {
         for (int i = 0; i <= TOTAL_CHARS; i++)
         {
