@@ -46,11 +46,6 @@ int main(int argc, char **argv)
     printf("rank %d\n\n", rank);
     MPI_Barrier(MPI_COMM_WORLD);
 
-    for (int i = 0; i < TOTAL_CHARS; i++)
-    {
-        printf("%d\n", nums[i].occurrence);
-    }
-
     printf("rank %d\n", rank);
     start = MPI_Wtime();
 
@@ -68,6 +63,11 @@ int main(int argc, char **argv)
     {
         int index = (int)string[i] - 'a';
         nums[index].occurrence++;
+    }
+
+    for (int i = 0; i < TOTAL_CHARS; i++)
+    {
+        printf("%d\n", nums[i].occurrence);
     }
 
     MPI_Barrier(MPI_COMM_WORLD);
