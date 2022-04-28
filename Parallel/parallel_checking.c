@@ -27,7 +27,7 @@ int main(int argc, char **argv)
         chars_occurrences[i] = 0;
     }
     int barrier = MPI_Barrier(MPI_COMM_WORLD);
-    if (barrier == 1)
+    if (barrier == 0)
     {
         double start = MPI_Wtime();
 
