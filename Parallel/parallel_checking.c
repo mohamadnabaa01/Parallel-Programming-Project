@@ -30,6 +30,7 @@ int main(int argc, char **argv)
     }
     char *string;
     int number_of_characters = 0;
+    printf("Rank %d", rank);
 
     if (rank == 0)
     {
