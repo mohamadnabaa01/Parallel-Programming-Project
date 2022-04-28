@@ -63,7 +63,8 @@ int main(int argc, char **argv)
     {
         for (int i = 0; i < TOTAL_CHARS; i++)
         {
-            printf("The char %c is repeated %d times in the string\n", (char)i + 'a', receive_occurrences[i]);
+            if (receive_occurrences[i] != 0)
+                printf("The char %c is repeated %d times in the string\n", (char)i + 'a', receive_occurrences[i]);
         }
         double end = MPI_Wtime();
         printf("Execution time: %f\n", end - start);
