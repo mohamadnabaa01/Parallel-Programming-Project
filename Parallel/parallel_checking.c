@@ -64,8 +64,8 @@ int main(int argc, char **argv)
     for (int i = low; i <= high; i++)
     {
         int index = (int)string[i] - 'a';
-        MPI_Wait(1);
         nums[index].occurrence++;
+        printf("Rank %d occurrence %d", nums[index].occurrence);
     }
 
     MPI_Barrier(MPI_COMM_WORLD);
