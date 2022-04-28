@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <stddef.h>
 #include <string.h>
 
 #define TOTAL_CHARS 26
