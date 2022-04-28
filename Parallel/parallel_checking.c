@@ -41,9 +41,6 @@ int main(int argc, char **argv)
     char *string = (char *)malloc(sizeof(char) * number_of_characters);
     fscanf(file, "%[^\n]\n", string);
 
-    // MPI_Bcast(&number_of_characters, 1, MPI_INT, 0, MPI_COMM_WORLD);
-    // MPI_Bcast(string, number_of_characters, MPI_CHAR, 0, MPI_COMM_WORLD);
-
     int num_of_chars_per_processor = number_of_characters / size;
 
     int low = num_of_chars_per_processor * rank;
@@ -53,14 +50,11 @@ int main(int argc, char **argv)
     {
         int index = (int)string[i] - 'a';
         chars_occurrences[index]++;
-        // nums[index].occurrence++;
     }
 
     int receive_occurrences[TOTAL_CHARS];
 
     MPI_Reduce(chars_occurrences, receive_occurrences, TOTAL_CHARS, MPI_INT, MPI_SUM, 0, MPI_COMM_WORLD);
-
-    MPI_Barrier(MPI_COMM_WORLD);
 
     if (rank == 0)
     {
