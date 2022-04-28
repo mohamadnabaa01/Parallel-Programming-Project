@@ -27,9 +27,8 @@ int main(int argc, char **argv)
         nums[i].occurrence = 0;
     }
 
-    double start, end;
     MPI_Barrier(MPI_COMM_WORLD);
-    start = MPI_Wtime();
+    double start = MPI_Wtime();
 
     char *string;
     int number_of_characters = 0;
@@ -63,11 +62,7 @@ int main(int argc, char **argv)
         {
             printf("The char %c is repeated %d times in the string\n", nums[i].character, nums[i].occurrence);
         }
-    }
-    end = MPI_Wtime();
-
-    if (rank == 0)
-    {
+        double end = MPI_Wtime();
         printf("Execution time: %f\n", end - start);
     }
     MPI_Finalize();
