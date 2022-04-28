@@ -26,16 +26,16 @@ int main(int argc, char **argv)
     int number_of_characters = 320;
 
     char *string = (char *)malloc(sizeof(char) * number_of_characters);
-    string = "nuewibieubciuburebrubuybryubrfyubfryuvfrtywuihunxbwquvqtwvtaqvrynuewibieubciuburebrubuybryubrfyubfryuvfrtywuihunxbwquvqtwvtaqvrynuewibieubciuburebrubuybryubrfyubfryuvfrtywuihunxbwquvqtwvtaqvrynuewibieubciuburebrubuybryubrfyubfryuvfrtywuihunxbwquvqtwvtaqvrynuewibieubciuburebrubuybryubrfyubfryuvfrtywuihunxbwquvqtwvtaqvry";
+    // string = "nuewibieubciuburebrubuybryubrfyubfryuvfrtywuihunxbwquvqtwvtaqvrynuewibieubciuburebrubuybryubrfyubfryuvfrtywuihunxbwquvqtwvtaqvrynuewibieubciuburebrubuybryubrfyubfryuvfrtywuihunxbwquvqtwvtaqvrynuewibieubciuburebrubuybryubrfyubfryuvfrtywuihunxbwquvqtwvtaqvrynuewibieubciuburebrubuybryubrfyubfryuvfrtywuihunxbwquvqtwvtaqvry";
 
-    // FILE *file;
-    // file = fopen("string.txt", "r"); // open the file fname
-    // if (!file)                       // if open failed
-    //     return -1;
-    // fscanf(file, "%d\n", &number_of_characters);
-    // printf("Length of string is: %d\n", number_of_characters);
-    // char *string = (char *)malloc(sizeof(char) * number_of_characters);
-    // fscanf(file, "%[^\n]\n", string);
+    FILE *file;
+    file = fopen("string.txt", "r"); // open the file fname
+    if (!file)                       // if open failed
+        return -1;
+    fscanf(file, "%d\n", &number_of_characters);
+    printf("Length of string is: %d\n", number_of_characters);
+    char *string = (char *)malloc(sizeof(char) * number_of_characters);
+    fscanf(file, "%[^\n]\n", string);
 
     int num_of_chars_per_processor = number_of_characters / size;
 
