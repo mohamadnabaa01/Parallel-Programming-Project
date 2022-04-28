@@ -24,8 +24,6 @@ int main(int argc, char **argv)
     double start = MPI_Wtime();
 
     int number_of_characters = 320;
-
-    char *string = (char *)malloc(sizeof(char) * number_of_characters);
     // string = "nuewibieubciuburebrubuybryubrfyubfryuvfrtywuihunxbwquvqtwvtaqvrynuewibieubciuburebrubuybryubrfyubfryuvfrtywuihunxbwquvqtwvtaqvrynuewibieubciuburebrubuybryubrfyubfryuvfrtywuihunxbwquvqtwvtaqvrynuewibieubciuburebrubuybryubrfyubfryuvfrtywuihunxbwquvqtwvtaqvrynuewibieubciuburebrubuybryubrfyubfryuvfrtywuihunxbwquvqtwvtaqvry";
 
     FILE *file;
