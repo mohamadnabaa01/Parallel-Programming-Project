@@ -38,7 +38,15 @@ int main(int argc, char **argv)
     int num_of_chars_per_processor = number_of_characters / size;
 
     int low = num_of_chars_per_processor * rank;
-    int high = low + num_of_chars_per_processor;
+    int high;
+    if (rank == size - 1)
+    {
+        high = number_of_characters;
+    }
+    else
+    {
+        high = low + num_of_chars_per_processor;
+    }
 
     for (int i = low; i < high; i++)
     {
