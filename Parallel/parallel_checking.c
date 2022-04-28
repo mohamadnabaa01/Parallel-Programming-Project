@@ -23,7 +23,7 @@ int main(int argc, char **argv)
 
     double start = MPI_Wtime();
 
-    int number_of_characters = 320;
+    int number_of_characters = 0;
     // string = "nuewibieubciuburebrubuybryubrfyubfryuvfrtywuihunxbwquvqtwvtaqvrynuewibieubciuburebrubuybryubrfyubfryuvfrtywuihunxbwquvqtwvtaqvrynuewibieubciuburebrubuybryubrfyubfryuvfrtywuihunxbwquvqtwvtaqvrynuewibieubciuburebrubuybryubrfyubfryuvfrtywuihunxbwquvqtwvtaqvrynuewibieubciuburebrubuybryubrfyubfryuvfrtywuihunxbwquvqtwvtaqvry";
 
     FILE *file;
