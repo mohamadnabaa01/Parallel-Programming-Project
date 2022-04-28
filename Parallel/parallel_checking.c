@@ -56,15 +56,17 @@ int main(int argc, char **argv)
     }
 
     MPI_Barrier(MPI_COMM_WORLD);
+    printf("Rank %d:\n", rank);
+    for (int i = 0; i <= TOTAL_CHARS; i++)
+    {
+        printf("The char %c is repeated %d times in the string\n", nums[i].character, nums[i].occurrence);
+    }
 
     if (rank == 0)
     {
-        for (int i = 0; i <= TOTAL_CHARS; i++)
-        {
-            printf("The char %c is repeated %d times in the string\n", nums[i].character, nums[i].occurrence);
-        }
         double end = MPI_Wtime();
         printf("Execution time: %f\n", end - start);
     }
+
     MPI_Finalize();
 }
