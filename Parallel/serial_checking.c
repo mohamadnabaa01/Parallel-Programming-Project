@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 
 
 #define SIZE 26
@@ -19,8 +18,6 @@ int main(void)
     fscanf(file, "%[^\n]\n", string); // read the contents of the file and put in string
     printf("The string is: %s\n", string);
 
-    time(&start_time);
-    printf("%f", start_time);
 
     int check_occurences[SIZE];
     for (int i = 0; i < SIZE; i++)
@@ -33,8 +30,6 @@ int main(void)
         if (check_occurences[i] != 0)
             printf("The char %c is repeated %d times in the string\n", ((char)(i + 'a')), check_occurences[i]);
 
-    time(&end_time);
-    printf("%f", end_time);
 
     printf("Time complexity: %f", (double) (start_time - end_time));
     return 0;
